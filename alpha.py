@@ -1,66 +1,28 @@
 import tkinter
 from tkinter import *
-import sqlite3
+from kon import *
 import ctypes
+import act
 
-con = sqlite3.connect('alpha.db')
-exe = con.cursor()
+ndas = tkinter.Tk()
 
+Label(ndas, text="First Name").grid(row=0)
+Label(ndas, text="Last Name").grid(row=1)
 
-class Application(tkinter.Frame):
-    def __init__(self, master):
-        tkinter.Frame.__init__(self, master)
-        self.master.minsize(width=256, height=256)
-        self.master.config()
-        self.pack()
+e1 = Entry(ndas)
+e2 = Entry(ndas)
+e1.insert(10,"Miller")
+e2.insert(10,"Jill")
 
-        self.main_frame = tkinter.Frame()
+e1.grid(row=0, column=1)
+e2.grid(row=1, column=1)
 
-        self.some_list = [
-            'One',
-            'Two',
-            'Three',
-            'Four'
-        ]
+def show_entry_fields():
+    print ("first name : %s/nLast name : %s" % (e1.get(), e2.get()))
+    exe.execute("insert into agenda (nome, telefone) values (?,?)", (e1.get(), e2.get()))
+    con.commit()
 
-        self.some_listbox = tkinter.Listbox(self.main_frame)
+Button(ndas, text='Quit', command=ndas.quit).grid(row=3, column=0, sticky=W, pady=4)
+Button(ndas, text='Show', command=show_entry_fields).grid(row=3, column=1, sticky=W, pady=4)
 
-        # bind the selection event to a custom function
-        # Note the absence of parentheses because it's a callback function
-        self.some_listbox.bind('<<ListboxSelect>>', self.listbox_changed)
-        self.some_listbox.pack(fill='both', expand=True)
-        self.main_frame.pack(fill='both', expand=True)
-
-        # insert our items into the list box
-        for i, item in enumerate(self.some_list):
-            self.some_listbox.insert(i, item)
-
-        # make a label to show the selected item
-        self.some_label = tkinter.Label(self.main_frame, text="Welcome to SO!")
-        self.some_label.pack(side='top')
-
-        # not really necessary, just make things look nice and centered
-        self.main_frame.place(in_=self.master, anchor='c', relx=.5, rely=.5)
-
-    def listbox_changed(self, *args, **kwargs):
-        selection_index = self.some_listbox.curselection()
-        selection_text = self.some_listbox.get(selection_index, selection_index)
-        self.some_label.config(text=selection_text)
-        t = ("john", "097")
-        j = 1
-        if j == "One":
-            exe.execute("CREATE TABLE IF NOT EXISTS agenda("
-                                 "nome TEXT PRIMARY KEY NOT NULL,"
-                                 "telefone  TEXT NOT NULL)")
-            con.commit()
-        elif j == 1:
-            exe.execute("INSERT INTO agenda(nome,telefone) VALUES (?,?)",t)
-            con.commit()
-            ctypes.windll.user32.MessageBoxW(0, "ct %s" % selection_text, "ypes", 1)
-        else:
-            print ("dobol %s" % selection_text)
-            
-
-root = tkinter.Tk()
-app = Application(root)
-app.mainloop()
+mainloop()
