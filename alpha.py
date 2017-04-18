@@ -40,8 +40,9 @@ e8.grid(row=7, column=1)
 def show_entry_fields():
     exe.execute("insert into movie (title, tanggal, episode, keterangan, rating, country, lang, genre, tglinput) values (?,?,?,?,?,?,?,?, ?)", (e1.get(), e2.get(), e3.get(), e4.get(), e5.get(), e6.get(), e7.get(), e8.get(), today))
     con.commit()
+    e1.insert(10, "")
 
 Button(ndas, text='Quit', command=ndas.quit).grid(row=9, column=0, sticky=W, pady=4)
-Button(ndas, text='Show', command=show_entry_fields).grid(row=9, column=1, sticky=W, pady=4)
+Button(ndas, text='Save', command=show_entry_fields).grid(row=9, column=1, sticky=W, pady=4)
 
 mainloop()
