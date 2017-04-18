@@ -3,26 +3,45 @@ from tkinter import *
 from kon import *
 import ctypes
 import act
+import datetime
 
+today = datetime.date.today()
 ndas = tkinter.Tk()
 
-Label(ndas, text="First Name").grid(row=0)
-Label(ndas, text="Last Name").grid(row=1)
+Label(ndas, text="Title").grid(row=0)
+Label(ndas, text="Tanggal").grid(row=1)
+Label(ndas, text="Episode").grid(row=2)
+Label(ndas, text="Keterangan").grid(row=3)
+Label(ndas, text="Rating").grid(row=4)
+Label(ndas, text="Country").grid(row=5)
+Label(ndas, text="Language").grid(row=6)
+Label(ndas, text="Genre").grid(row=7)
 
 e1 = Entry(ndas)
 e2 = Entry(ndas)
-e1.insert(10,"Miller")
-e2.insert(10,"Jill")
+e3 = Entry(ndas)
+e4 = Entry(ndas)
+e5 = Entry(ndas)
+e6 = Entry(ndas)
+e7 = Entry(ndas)
+e8 = Entry(ndas)
+
+e2.insert(10, today)
 
 e1.grid(row=0, column=1)
 e2.grid(row=1, column=1)
+e3.grid(row=2, column=1)
+e4.grid(row=3, column=1)
+e5.grid(row=4, column=1)
+e6.grid(row=5, column=1)
+e7.grid(row=6, column=1)
+e8.grid(row=7, column=1)
 
 def show_entry_fields():
-    print ("first name : %s/nLast name : %s" % (e1.get(), e2.get()))
-    exe.execute("insert into agenda (nome, telefone) values (?,?)", (e1.get(), e2.get()))
+    exe.execute("insert into movie (title, tanggal, episode, keterangan, rating, country, lang, genre, tglinput) values (?,?,?,?,?,?,?,?, ?)", (e1.get(), e2.get(), e3.get(), e4.get(), e5.get(), e6.get(), e7.get(), e8.get(), today))
     con.commit()
 
-Button(ndas, text='Quit', command=ndas.quit).grid(row=3, column=0, sticky=W, pady=4)
-Button(ndas, text='Show', command=show_entry_fields).grid(row=3, column=1, sticky=W, pady=4)
+Button(ndas, text='Quit', command=ndas.quit).grid(row=9, column=0, sticky=W, pady=4)
+Button(ndas, text='Show', command=show_entry_fields).grid(row=9, column=1, sticky=W, pady=4)
 
 mainloop()
