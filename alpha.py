@@ -4,9 +4,14 @@ from kon import *
 import ctypes
 import act
 import datetime
+from tkinter import ttk
 
 today = datetime.date.today()
 ndas = tkinter.Tk()
+tree = ttk.Treeview(ndas)
+
+able = StringVar(ndas)
+able.set("English")
 
 Label(ndas, text="Title").grid(row=0)
 Label(ndas, text="Tanggal").grid(row=1)
@@ -23,7 +28,7 @@ e3 = Entry(ndas)
 e4 = Entry(ndas)
 e5 = Entry(ndas)
 e6 = Entry(ndas)
-e7 = Entry(ndas)
+e7 = OptionMenu(ndas, able, "English", "Japanese", "Korean", "Thai")
 e8 = Entry(ndas)
 
 e2.insert(10, today)
@@ -38,9 +43,14 @@ e7.grid(row=6, column=1)
 e8.grid(row=7, column=1)
 
 def show_entry_fields():
-    exe.execute("insert into movie (title, tanggal, episode, keterangan, rating, country, lang, genre, tglinput) values (?,?,?,?,?,?,?,?, ?)", (e1.get(), e2.get(), e3.get(), e4.get(), e5.get(), e6.get(), e7.get(), e8.get(), today))
+    exe.execute("insert into movie (title, tanggal, episode, keterangan, rating, country, lang, genre, tglinput) values (?,?,?,?,?,?,?,?, ?)", (e1.get(), e2.get(), e3.get(), e4.get(), e5.get(), e6.get(), able.get(), e8.get(), today))
     con.commit()
-    e1.insert(10, "")
+    e1.delete(0, "end")
+    e3.delete(0, "end")
+    e4.delete(0, "end")
+    e5.delete(0, "end")
+    e6.delete(0, "end")
+    e8.delete(0, "end")
 
 Button(ndas, text='Quit', command=ndas.quit).grid(row=9, column=0, sticky=W, pady=4)
 Button(ndas, text='Save', command=show_entry_fields).grid(row=9, column=1, sticky=W, pady=4)
