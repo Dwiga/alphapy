@@ -1,7 +1,7 @@
 import tkinter
 from tkinter import *
-from kon import *
-from act import *
+from kon import mylyt
+from act import cba
 import ctypes
 import act
 import datetime
