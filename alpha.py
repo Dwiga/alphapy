@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import *
 from kon import *
+from act import *
 import ctypes
 import act
 import datetime
@@ -12,6 +13,16 @@ tree = ttk.Treeview(ndas)
 
 able = StringVar(ndas)
 able.set("English")
+
+def sve():
+    exe.execute("insert into movie (title, tanggal, episode, keterangan, rating, country, lang, genre, tglinput) values (?,?,?,?,?,?,?,?, ?)", (e1.get(), e2.get(), e3.get(), e4.get(), e5.get(), e6.get(),able.get(),e8.get(), today))
+    con.commit()
+    e1.delete(0, "end")
+    e3.delete(0, "end")
+    e4.delete(0, "end")
+    e5.delete(0, "end")
+    e6.delete(0, "end")
+    e8.delete(0, "end")
 
 Label(ndas, text="Title").grid(row=0)
 Label(ndas, text="Tanggal").grid(row=1)
@@ -42,17 +53,8 @@ e6.grid(row=5, column=1)
 e7.grid(row=6, column=1)
 e8.grid(row=7, column=1)
 
-def show_entry_fields():
-    exe.execute("insert into movie (title, tanggal, episode, keterangan, rating, country, lang, genre, tglinput) values (?,?,?,?,?,?,?,?, ?)", (e1.get(), e2.get(), e3.get(), e4.get(), e5.get(), e6.get(), able.get(), e8.get(), today))
-    con.commit()
-    e1.delete(0, "end")
-    e3.delete(0, "end")
-    e4.delete(0, "end")
-    e5.delete(0, "end")
-    e6.delete(0, "end")
-    e8.delete(0, "end")
-
 Button(ndas, text='Quit', command=ndas.quit).grid(row=9, column=0, sticky=W, pady=4)
-Button(ndas, text='Save', command=show_entry_fields).grid(row=9, column=1, sticky=W, pady=4)
+Button(ndas, text='Save', command=sve).grid(row=9, column=1, sticky=W, pady=4)
+Button(ndas, text='Coba', command= lambda: cba(e1.get())).grid(row=9, column=2, sticky=W, pady=4)
 
 mainloop()
