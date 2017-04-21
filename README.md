@@ -1,3 +1,3 @@
 # alphapy
-my first python tkinter application
-connection into sqlite, and how to operate it.
+my first python tkinter application <br>
+connection into sqlite & mysql, and how to operate it.
