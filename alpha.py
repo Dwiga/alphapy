@@ -1,6 +1,8 @@
 import tkinter
 from tkinter import *
-from kon import mylyt
+from kon import con, exe
+con = con
+exe = exe
 from act import cba
 import ctypes
 import act
@@ -55,6 +57,6 @@ e8.grid(row=7, column=1)
 
 Button(ndas, text='Quit', command=ndas.quit).grid(row=9, column=0, sticky=W, pady=4)
 Button(ndas, text='Save', command=sve).grid(row=9, column=1, sticky=W, pady=4)
-Button(ndas, text='Coba', command= lambda: cba(e1.get())).grid(row=9, column=2, sticky=W, pady=4)
+Button(ndas, text='Coba', command= lambda: cba(e1.get(), e2.get(), e3.get(), e4.get(), e5.get(), e6.get(),able.get(),e8.get())).grid(row=9, column=2, sticky=W, pady=4)
 
 mainloop()
