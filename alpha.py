@@ -25,6 +25,10 @@ def sve():
     e5.delete(0, "end")
     e6.delete(0, "end")
     e8.delete(0, "end")
+    
+def tst(dta):
+    exe.execute("""delete from movie where id=?""", (dta))
+    con.commit()
 
 Label(ndas, text="Title").grid(row=0)
 Label(ndas, text="Tanggal").grid(row=1)
