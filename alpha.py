@@ -1,3 +1,4 @@
+"""My Project"""
 import tkinter
 from tkinter import *
 from kon import con, exe
